@@ -1,0 +1,19 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.card {
+  padding: 16px;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.description {
+  margin: 0;
+  color: $text-muted;
+}

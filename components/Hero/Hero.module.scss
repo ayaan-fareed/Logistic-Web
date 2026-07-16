@@ -1,0 +1,15 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+// Hero.module.scss
+.hero {
+  padding: 80px 20px;
+  background: var(--primary-color);
+  text-align: center;
+
+  .heading {
+    font-size: 48px;
+    color: white;
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,23 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  padding: 16px;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+}
+
+.question {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.answer {
+  margin-top: 8px;
+}

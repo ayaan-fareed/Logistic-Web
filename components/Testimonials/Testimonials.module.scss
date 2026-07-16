@@ -1,0 +1,83 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+.testimonials {
+  padding: 80px 32px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 50px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navBtn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &:hover {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+  }
+}
+
+.card {
+  min-height: 160px;
+}
+
+.text {
+  font-size: 17px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.role {
+  font-size: 13px;
+  color: #888;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.activeDot {
+  background: var(--accent-color);
+  width: 20px;
+  border-radius: 4px;
+}

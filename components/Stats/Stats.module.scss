@@ -1,0 +1,36 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.stats {
+  padding: 60px 32px;
+  background: #f8f9fa;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+
+  @media (min-width: 700px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.statBox {
+  padding: 20px;
+}
+
+.number {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.label {
+  font-size: 15px;
+  color: #555;
+}
