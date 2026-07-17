@@ -1,11 +1,100 @@
 :root {
-  --primary-color: #0a2540;
-  --accent-color: #ff6b35;
-  --font-main: 'Inter', sans-serif;
+  // Colors — dark premium theme
+  --color-bg-dark: #0a0e1a;
+  --color-bg-darker: #05070d;
+  --color-bg-light: #ffffff;
+  --color-bg-offwhite: #f7f8fa;
+
+  --color-primary: #0a0e1a;      // near-black navy
+  --color-accent: #ff6b35;        // orange CTA accent
+  --color-accent-hover: #e85a28;
+
+  --color-text-light: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.65);
+  --color-text-dark: #1a1d24;
+  --color-text-gray: #5c6270;
+
+  --color-border-dark: rgba(255, 255, 255, 0.08);
+  --color-border-light: #e8e9ec;
+
+  // Typography
+  --font-main: var(--font-inter), -apple-system, sans-serif;
+  --fs-hero: clamp(40px, 6vw, 76px);
+  --fs-h1: clamp(32px, 4vw, 48px);
+  --fs-h2: clamp(26px, 3vw, 36px);
+  --fs-body: 16px;
+  --fs-small: 14px;
+
+  // Spacing
+  --section-padding: clamp(60px, 8vw, 120px) clamp(20px, 5vw, 60px);
+  --radius: 12px;
+
+  // Layout
+  --max-width: 1300px;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--color-bg-light);
+  color: var(--color-text-dark);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+// Utility: dark section wrapper — use this class on any section that should be dark
+.dark-section {
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
+}
+
+// Reusable glow blur shape (used behind hero/heavy sections for the premium look)
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.globe-location-label {
+  align-items: center;
+  color: rgba(255, 245, 236, 0.9);
+  display: flex;
+  font-family: var(--font-main);
+  font-size: 8px;
+  font-weight: 700;
+  gap: 5px;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 8px #000;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.globe-location-label i {
+  background: #ff6a22;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ff6a22;
+  display: block;
+  height: 4px;
+  width: 4px;
 }

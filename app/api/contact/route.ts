@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     await resend.emails.send({
       from: 'Contact Form <onboarding@resend.dev>',
-      to: 'fareedayaan234@gmail.com',
+      to: 'ayaan.fareed2001@gmail.com',
       subject: `New quote request from ${name}`,
       html: `
         <p><strong>Name:</strong> ${name}</p>
