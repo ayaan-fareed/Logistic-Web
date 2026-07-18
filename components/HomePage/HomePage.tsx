@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -47,7 +46,7 @@ export default function HomePage() {
     <main className={styles.page}>
       <SmoothScroll />
       <header className={`${styles.navbar} ${scrolled ? styles.navbarSolid : ''}`}>
-        <Link href="/" className={styles.logo} aria-label="United Carriers home"><span>UNITED</span><span>CARRIERS</span></Link>
+        <a href="#home" className={styles.logo} aria-label="United Carriers home"><span>UNITED</span><span>CARRIERS</span></a>
         <nav className={styles.navLinks} aria-label="Primary navigation">
           <a href="#services">Services</a><a href="#approach">Approach</a><a href="#insights">Insights</a><a href="#contact">Contact</a>
         </nav>
@@ -56,7 +55,7 @@ export default function HomePage() {
       </header>
       <AnimatePresence>{menuOpen && <motion.nav className={styles.mobileMenu} initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}><a href="#services" onClick={() => setMenuOpen(false)}>Services</a><a href="#approach" onClick={() => setMenuOpen(false)}>Approach</a><a href="#insights" onClick={() => setMenuOpen(false)}>Insights</a><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></motion.nav>}</AnimatePresence>
 
-      <section className={styles.hero}>
+      <section className={styles.hero} id="home">
         <div className={styles.heroCanvas}><GlobeCanvas /></div>
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>Independent global logistics</p>
