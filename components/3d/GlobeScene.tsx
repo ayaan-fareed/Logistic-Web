@@ -4,7 +4,6 @@ import { PresentationControls, Stars } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
 import * as THREE from 'three';
-import Atmosphere from './Atmosphere';
 import DotGlobe from './DotGlobe';
 import GlobeMarkers from './GlobeMarkers';
 import Routes from './Routes';
@@ -21,7 +20,6 @@ export default function GlobeScene() {
     <PresentationControls global={false} rotation={[0.08, -0.88, -0.08]} polar={[-0.35, 0.35]} azimuth={[-1.3, 0.5]} snap>
       <group ref={scene}>
         <DotGlobe />
-        <Atmosphere />
         <Routes />
         <GlobeMarkers />
       </group>

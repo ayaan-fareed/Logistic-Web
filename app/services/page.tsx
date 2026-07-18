@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar/Navbar';
+import PreFooter from '@/components/PreFooter/PreFooter';
 import Footer from '@/components/Footer/Footer';
 import styles from './services.module.scss';
 
@@ -29,6 +30,7 @@ export default function ServicesPage() {
           </div>
         ))}
       </section>
+      <PreFooter />
       <Footer />
     </>
   );

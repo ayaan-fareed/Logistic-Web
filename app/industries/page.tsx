@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar/Navbar';
+import PreFooter from '@/components/PreFooter/PreFooter';
 import Footer from '@/components/Footer/Footer';
 import styles from './industries.module.scss';
 
@@ -28,6 +29,7 @@ export default function IndustriesPage() {
           </div>
         ))}
       </section>
+      <PreFooter />
       <Footer />
     </>
   );

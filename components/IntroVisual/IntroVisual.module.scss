@@ -1,0 +1,57 @@
+.visual {
+  width: 100%;
+  max-width: 460px;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.route {
+  animation: dash 18s linear infinite;
+}
+
+.ship {
+  animation: bob 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.plane {
+  animation: bob 3s ease-in-out infinite reverse;
+  transform-origin: center;
+}
+
+.pill {
+  animation: float 5s ease-in-out infinite;
+}
+
+.pill:nth-of-type(2) {
+  animation-delay: 1.2s;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+
+@keyframes bob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}

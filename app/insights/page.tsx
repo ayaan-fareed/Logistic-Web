@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllPosts } from '@/lib/posts';
 import Navbar from '@/components/Navbar/Navbar';
+import PreFooter from '@/components/PreFooter/PreFooter';
 import Footer from '@/components/Footer/Footer';
 import styles from './insights.module.scss';
 
@@ -30,6 +31,7 @@ export default function InsightsPage() {
           ))}
         </div>
       </section>
+      <PreFooter />
       <Footer />
     </>
   );

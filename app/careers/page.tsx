@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar/Navbar';
+import PreFooter from '@/components/PreFooter/PreFooter';
 import Footer from '@/components/Footer/Footer';
 import styles from './careers.module.scss';
 
@@ -31,6 +32,7 @@ export default function CareersPage() {
           ))}
         </div>
       </section>
+      <PreFooter />
       <Footer />
     </>
   );

@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
-import styles from './Footer.module.scss';
+import styles from './PreFooter.module.scss';
 
-export default function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
+export default function PreFooter() {
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -16,29 +16,36 @@ export default function Footer() {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
 
-    const animElements = footerRef.current?.querySelectorAll(`.${styles.fadeIn}`);
+    const animElements = sectionRef.current?.querySelectorAll(`.${styles.fadeIn}`);
     animElements?.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
   }, []);
 
   return (
-    <footer className={styles.footer} ref={footerRef}>
+    <section className={styles.preFooter} ref={sectionRef}>
       {/* Background watermark */}
       <div className={styles.watermark} aria-hidden="true">
         UNITED CARRIERS
       </div>
 
-      {/* Dotted world map background */}
+      {/* Dotted world map */}
       <div className={styles.worldMap} aria-hidden="true" />
 
-      {/* Main Footer Content */}
-      <div className={styles.mainContent}>
+      {/* Particles */}
+      <div className={styles.particles} aria-hidden="true" />
+
+      {/* Main Grid */}
+      <div className={styles.grid}>
+        {/* Column 1 — Connect With Us */}
         <div className={`${styles.column} ${styles.fadeIn}`}>
-          <h4>Socials</h4>
+          <h4>Connect With Us</h4>
+          <p className={styles.intro}>
+            United Carriers delivers end-to-end freight solutions across air, ocean, and road — trusted by businesses in Australia, New Zealand, and Asia.
+          </p>
           <div className={styles.socialIcons}>
             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -68,8 +75,9 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Column 2 — Quick Navigation */}
         <div className={`${styles.column} ${styles.fadeIn}`}>
-          <h4>Company</h4>
+          <h4>Quick Navigation</h4>
           <nav className={styles.navLinks}>
             <Link href="/">Home</Link>
             <Link href="/about">About Us</Link>
@@ -80,11 +88,12 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className={`${styles.column} ${styles.contactColumn} ${styles.fadeIn}`}>
-          <h4>Head Office</h4>
+        {/* Column 3 — Global Contact */}
+        <div className={`${styles.column} ${styles.fadeIn}`}>
+          <h4>Global Contact</h4>
           <div className={styles.contactInfo}>
             <div className={styles.contactItem}>
-              <span className={styles.contactLabel}>Address</span>
+              <span className={styles.contactLabel}>Head Office</span>
               <p>2A International Square,<br />Tullamarine VIC 3043, Australia.</p>
             </div>
             <div className={styles.contactItem}>
@@ -98,95 +107,56 @@ export default function Footer() {
               </div>
               <div className={styles.contactItem}>
                 <span className={styles.contactLabel}>Office Hours</span>
-                <p>Monday - Friday / 8:30AM - 5PM</p>
+                <p>Mon – Fri / 8:30AM – 5PM</p>
               </div>
             </div>
             <div className={styles.contactItem}>
               <span className={styles.contactLabel}>Operating Across</span>
-              <p>Australia / New Zealand / Hong Kong / China</p>
+              <p>Australia&nbsp;/&nbsp;New Zealand&nbsp;/&nbsp;Hong Kong&nbsp;/&nbsp;China</p>
             </div>
           </div>
         </div>
 
+        {/* Column 4 — Trusted & Secure */}
         <div className={`${styles.column} ${styles.fadeIn}`}>
-          <h4>Secure Payments</h4>
-          <p className={styles.paymentNote}>
-            Payments secured via PCI-DSS compliant gateway. Card details are not stored.
+          <h4>Trusted &amp; Secure</h4>
+          <p className={styles.trustStatement}>
+            Payments secured via PCI-DSS compliant gateway. Card details are never stored on our servers.
           </p>
-          <div className={styles.paymentIcons}>
-            <span className={styles.paymentBadge}>VISA</span>
-            <span className={styles.paymentBadge}>MC</span>
-            <span className={styles.paymentBadge}>AMEX</span>
-            <span className={styles.paymentBadge}>
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path d="M17.72 5.011H8.026c-2.273 0-4.12 1.847-4.12 4.12v5.768c0 2.273 1.847 4.12 4.12 4.12h9.694c2.273 0 4.12-1.847 4.12-4.12V9.131c0-2.273-1.847-4.12-4.12-4.12z"/>
+          <div className={styles.paymentGrid}>
+            <span className={styles.badge}>VISA</span>
+            <span className={styles.badge}>
+              <svg viewBox="0 0 24 24" width="20" height="14">
+                <circle cx="9" cy="12" r="6" fill="#eb001b" opacity="0.85"/>
+                <circle cx="15" cy="12" r="6" fill="#f79e1b" opacity="0.85"/>
               </svg>
             </span>
-            <span className={styles.paymentBadge}>
-              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+            <span className={styles.badge}>AMEX</span>
+            <span className={styles.badge}>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" width="18" height="14">
+                <rect x="1" y="4" width="22" height="16" rx="3"/>
+                <path d="M12 9v6M9 12h6"/>
               </svg>
             </span>
-            <span className={styles.paymentBadge}>GPay</span>
+            <span className={styles.badge}>
+              <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+              </svg>
+            </span>
+            <span className={styles.badge}>GPay</span>
+          </div>
+          <div className={styles.securityBadge}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="16" height="16">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+            <span>PCI-DSS Certified · 256-bit SSL</span>
           </div>
         </div>
       </div>
 
-      {/* Scrolling Industries Ticker */}
-      <div className={`${styles.ticker} ${styles.fadeIn}`}>
-        <div className={styles.tickerTrack}>
-          <span>Logistics</span>
-          <span>·</span>
-          <span>Mining & Resources</span>
-          <span>·</span>
-          <span>Building & Construction</span>
-          <span>·</span>
-          <span>Project Cargo</span>
-          <span>·</span>
-          <span>Engineering</span>
-          <span>·</span>
-          <span>Oil & Gas</span>
-          <span>·</span>
-          <span>Defence</span>
-          <span>·</span>
-          <span>Logistics</span>
-          <span>·</span>
-          <span>Mining & Resources</span>
-          <span>·</span>
-          <span>Building & Construction</span>
-          <span>·</span>
-          <span>Project Cargo</span>
-          <span>·</span>
-          <span>Engineering</span>
-          <span>·</span>
-          <span>Oil & Gas</span>
-          <span>·</span>
-          <span>Defence</span>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className={styles.bottomBar}>
-        <div className={styles.bottomContent}>
-          <p className={styles.copyright}>
-            © {new Date().getFullYear()} United Carriers APAC Pty Ltd. Crafted by <strong>BEARPLUS</strong>
-          </p>
-          <div className={styles.policyLinks}>
-            <Link href="/qhse">QHSE</Link>
-            <Link href="/privacy-policy">Privacy Policy</Link>
-            <Link href="/terms-conditions">Terms & Conditions</Link>
-            <Link href="/payment-policy">Payment Policy</Link>
-            <Link href="/delivery-policy">Delivery Policy</Link>
-            <Link href="/refund-policy">Refund & Returns Policy</Link>
-          </div>
-          <p className={styles.legalNote}>
-            All prices in AUD, inclusive of GST. Powered by Stripe.
-          </p>
-        </div>
-      </div>
-
-      {/* Dotted particles decoration */}
-      <div className={styles.particles} aria-hidden="true" />
-    </footer>
+      {/* Thin divider */}
+      <div className={styles.divider} />
+    </section>
   );
 }

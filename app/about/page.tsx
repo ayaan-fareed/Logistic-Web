@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar/Navbar';
+import PreFooter from '@/components/PreFooter/PreFooter';
 import Footer from '@/components/Footer/Footer';
 import styles from './about.module.scss';
 
@@ -38,6 +39,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <PreFooter />
       <Footer />
     </>
   );

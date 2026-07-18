@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { getPostBySlug } from '@/lib/posts';
 import Navbar from '@/components/Navbar/Navbar';
+import PreFooter from '@/components/PreFooter/PreFooter';
 import Footer from '@/components/Footer/Footer';
 import styles from './post.module.scss';
 
@@ -28,6 +29,7 @@ export default async function BlogPostPage({
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
       </article>
+      <PreFooter />
       <Footer />
     </>
   );

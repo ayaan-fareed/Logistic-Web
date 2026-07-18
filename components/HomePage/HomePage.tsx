@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll';
+import LiveTracking from '@/components/LiveTracking/LiveTracking';
+import IntroVisual from '@/components/IntroVisual/IntroVisual';
 import styles from './HomePage.module.scss';
 
 const GlobeCanvas = dynamic(() => import('@/components/3d/GlobeCanvas'), { ssr: false, loading: () => <div className={styles.globeLoader}>Loading network</div> });
@@ -56,7 +58,6 @@ export default function HomePage() {
 
       <section className={styles.hero}>
         <div className={styles.heroCanvas}><GlobeCanvas /></div>
-        <div className={styles.heroShade} />
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>Independent global logistics</p>
           <h1><span>We move freight.</span><span>We own the outcome.</span></h1>
@@ -68,7 +69,18 @@ export default function HomePage() {
 
       <div className={styles.marquee} aria-label="Every leg of the journey"><div>Every leg of the journey <b>✦</b> Every leg of the journey <b>✦</b> Every leg of the journey <b>✦</b> Every leg of the journey <b>✦</b></div></div>
 
-      <section className={styles.intro} id="tracking"><div className={styles.sectionIndex}>01 / What we do</div><div><p className={styles.largeCopy} data-reveal>Freight is only one part of the equation. We bring together the people, systems, and global network that make your supply chain work harder.</p><a className={styles.inlineLink} href="#approach">How we work <span>→</span></a></div></section>
+      <LiveTracking />
+
+      <section className={styles.intro} id="intro">
+        <div className={styles.introLeft}>
+          <div className={styles.sectionIndex}>01 / What we do</div>
+          <IntroVisual />
+        </div>
+        <div className={styles.introRight}>
+          <p className={styles.largeCopy} data-reveal>Freight is only one part of the equation. We bring together the people, systems, and global network that make your supply chain work harder.</p>
+          <a className={styles.inlineLink} href="#approach">How we work <span>→</span></a>
+        </div>
+      </section>
 
       <section className={styles.stats}><div data-reveal><strong>2,500<span>+</span></strong><p>shipments coordinated<br />each month</p></div><div data-reveal><strong>98.2<span>%</span></strong><p>on-time delivery<br />performance</p></div><div data-reveal><strong>42</strong><p>countries connected<br />through our network</p></div></section>
 

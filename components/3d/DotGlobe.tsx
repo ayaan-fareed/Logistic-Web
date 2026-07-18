@@ -7,7 +7,12 @@ import { useGlobePoints } from '@/hooks/useGlobePoints';
 
 const vertexShader = `
 precision highp float;
+attribute vec2 uv;
+attribute vec3 position;
+attribute mat4 instanceMatrix;
 uniform float uTime;
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
 varying vec2 vUv;
 void main() {
   vUv = uv;
