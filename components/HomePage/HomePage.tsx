@@ -1,10 +1,12 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
+import { useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Navbar from '@/components/Navbar/Navbar';
+import Footer from '@/components/Footer/Footer';
 import SmoothScroll from '@/components/SmoothScroll/SmoothScroll';
 import LiveTracking from '@/components/LiveTracking/LiveTracking';
 import IntroVisual from '@/components/IntroVisual/IntroVisual';
@@ -28,32 +30,18 @@ const capabilities = [
 ];
 
 export default function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     const context = gsap.context(() => {
       gsap.fromTo('[data-reveal]', { y: 42, opacity: 0 }, { y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', stagger: 0.09, scrollTrigger: { trigger: '[data-reveal]', start: 'top 88%' } });
     });
-    const onScroll = () => setScrolled(window.scrollY > 48);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => { context.revert(); window.removeEventListener('scroll', onScroll); };
+    return () => { context.revert(); };
   }, []);
 
   return (
     <main className={styles.page}>
       <SmoothScroll />
-      <header className={`${styles.navbar} ${scrolled ? styles.navbarSolid : ''}`}>
-        <a href="#home" className={styles.logo} aria-label="United Carriers home"><span>UNITED</span><span>CARRIERS</span></a>
-        <nav className={styles.navLinks} aria-label="Primary navigation">
-          <a href="#services">Services</a><a href="#approach">Approach</a><a href="#insights">Insights</a><a href="#contact">Contact</a>
-        </nav>
-        <a href="#tracking" className={styles.trackButton}>Live tracking <span>↗</span></a>
-        <button className={styles.menuButton} onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-label="Toggle navigation"><i /><i /></button>
-      </header>
-      <AnimatePresence>{menuOpen && <motion.nav className={styles.mobileMenu} initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}><a href="#services" onClick={() => setMenuOpen(false)}>Services</a><a href="#approach" onClick={() => setMenuOpen(false)}>Approach</a><a href="#insights" onClick={() => setMenuOpen(false)}>Insights</a><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></motion.nav>}</AnimatePresence>
+      <Navbar />
 
       <section className={styles.hero} id="home">
         <div className={styles.heroCanvas}><GlobeCanvas /></div>
@@ -61,7 +49,7 @@ export default function HomePage() {
           <p className={styles.eyebrow}>Independent global logistics</p>
           <h1><span>We move freight.</span><span>We own the outcome.</span></h1>
           <p className={styles.heroCopy}>From first booking to final delivery, we make complex logistics feel refreshingly straightforward.</p>
-          <div className={styles.heroActions}><a href="#contact" className={styles.darkButton}>Start a conversation <b>→</b></a><a href="#services" className={styles.textButton}>Explore our services <b>↓</b></a></div>
+          <div className={styles.heroActions}><Link href="/contact" className={styles.darkButton}>Start a conversation <b>→</b></Link><a href="#services" className={styles.textButton}>Explore our services <b>↓</b></a></div>
         </div>
         <div className={styles.heroFoot}><span>Scroll to explore</span><span>01 — 05</span></div>
       </section>
@@ -91,9 +79,9 @@ export default function HomePage() {
 
       <section className={styles.insights} id="insights"><div className={styles.servicesHead}><div><p className={styles.eyebrow}>04 / Insight</p><h2>Made for<br />the real world.</h2></div><a className={styles.inlineLink} href="#contact">View all insights <span>→</span></a></div><div className={styles.insightGrid}><article data-reveal><div className={`${styles.articleImage} ${styles.imageOne}`} /><p>Market intelligence · 6 min read</p><h3>How supply chains are finding certainty in an uncertain market</h3><a href="#contact">Read article <b>→</b></a></article><article data-reveal><div className={`${styles.articleImage} ${styles.imageTwo}`} /><p>Operations · 4 min read</p><h3>Five questions to ask before you ship peak-season cargo</h3><a href="#contact">Read article <b>→</b></a></article></div></section>
 
-      <section className={styles.contact} id="contact"><div className={styles.dotField} /><p className={styles.eyebrow}>Let&apos;s move something forward</p><h2>Ready when<br />you are.</h2><a href="mailto:hello@unitedcarriers.com" className={styles.lightButton}>Talk to our team <span>→</span></a></section>
+      <section className={styles.contact} id="contact"><div className={styles.dotField} /><p className={styles.eyebrow}>Let&apos;s move something forward</p><h2>Ready when<br />you are.</h2><Link href="/contact" className={styles.lightButton}>Talk to our team <span>→</span></Link></section>
 
-      <footer className={styles.footer}><div className={styles.footerTop}><div className={styles.footerBrand}><span>UNITED</span><span>CARRIERS</span></div><div><p>Services</p><a href="#services">Air freight</a><a href="#services">Ocean freight</a><a href="#services">Road freight</a></div><div><p>Company</p><a href="#approach">Our approach</a><a href="#insights">Insights</a><a href="#contact">Contact</a></div><div><p>Connect</p><a href="mailto:hello@unitedcarriers.com">hello@unitedcarriers.com</a><a href="tel:+61290000000">+61 2 9000 0000</a></div></div><div className={styles.footerBottom}><span>© 2026 United Carriers</span><span>Privacy &nbsp; Terms</span><span>Made for movement</span></div></footer>
+      <Footer />
     </main>
   );
 }

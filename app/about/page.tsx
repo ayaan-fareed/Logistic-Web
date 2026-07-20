@@ -27,7 +27,7 @@ export default function AboutPage() {
         <div className={styles.grid}>
           <div className={styles.card}>
             <h3>Reliability</h3>
-            <p>We do what we say we'll do, every time.</p>
+            <p>We do what we say we&apos;ll do, every time.</p>
           </div>
           <div className={styles.card}>
             <h3>Transparency</h3>

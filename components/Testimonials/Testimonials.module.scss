@@ -81,3 +81,34 @@
   width: 20px;
   border-radius: 4px;
 }
+
+@media (max-width: 480px) {
+  .testimonials {
+    padding: 56px 16px;
+  }
+
+  .heading {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+
+  .slider {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .card {
+    flex: 0 0 100%;
+    min-height: 0;
+    order: -1;
+  }
+
+  .navBtn {
+    height: 44px;
+    width: 44px;
+  }
+
+  .text {
+    font-size: 15px;
+  }
+}

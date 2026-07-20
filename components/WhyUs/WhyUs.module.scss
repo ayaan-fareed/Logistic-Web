@@ -60,3 +60,26 @@
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
 }
+
+@media (max-width: 480px) {
+  .whyUs {
+    padding: 56px 16px;
+  }
+
+  .header {
+    margin-bottom: 36px;
+
+    h2 {
+      font-size: 28px;
+      line-height: 1.15;
+    }
+  }
+
+  .grid {
+    gap: 24px;
+  }
+
+  .card {
+    gap: 12px;
+  }
+}

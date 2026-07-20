@@ -336,3 +336,43 @@
     margin-top: 48px;
   }
 }
+
+@media (max-width: 480px) {
+  .preFooter {
+    padding: 64px 16px 48px;
+  }
+
+  .grid {
+    gap: 44px;
+  }
+
+  .navLinks {
+    gap: 0;
+  }
+
+  .navLinks a {
+    align-items: center;
+    display: flex;
+    min-height: 44px;
+  }
+
+  .contactInfo p {
+    overflow-wrap: anywhere;
+  }
+
+  .paymentGrid {
+    gap: 6px;
+  }
+
+  .badge {
+    min-width: 42px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .securityBadge {
+    align-items: flex-start;
+    line-height: 1.4;
+    padding: 10px;
+  }
+}

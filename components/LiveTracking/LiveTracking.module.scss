@@ -291,8 +291,64 @@
 }
 
 @media (max-width: 640px) {
+  .tracking {
+    padding: 64px 16px;
+  }
+
+  .inner {
+    gap: 44px;
+  }
+
+  .title {
+    font-size: clamp(2rem, 10vw, 2.5rem);
+  }
+
+  .form {
+    max-width: 100%;
+  }
+
+  .input {
+    min-width: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .button {
+    min-height: 44px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .modeRow {
+    gap: 8px;
+  }
+
+  .modeBadge {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .stat {
+    padding: 16px 12px;
+  }
+
+  .mapPanel {
+    min-height: 250px;
+  }
+
   .floatingCard {
     display: none;
+  }
+}
+
+@media (max-width: 359px) {
+  .form {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .button {
+    width: 100%;
   }
 }
 

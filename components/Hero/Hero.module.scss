@@ -79,3 +79,32 @@
     background: rgba(255, 255, 255, 0.05);
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 100svh;
+    padding: 104px 16px 64px;
+  }
+
+  .heading {
+    font-size: clamp(2.5rem, 13vw, 3.25rem);
+  }
+
+  .subheading {
+    font-size: 15px;
+  }
+
+  .ctaRow {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .primaryBtn,
+  .secondaryBtn {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 48px;
+    width: 100%;
+  }
+}

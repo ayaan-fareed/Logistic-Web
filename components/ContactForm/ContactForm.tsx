@@ -254,27 +254,61 @@ export default function ContactForm() {
 
   return (
     <section className={styles.contactSection} aria-labelledby="contact-heading">
-      <div className={`${styles.backgroundGlow} ${styles.top}`} aria-hidden="true" />
-      <div className={`${styles.backgroundGlow} ${styles.bottom}`} aria-hidden="true" />
+      <div className={styles.glowTop} aria-hidden="true" />
+      <div className={styles.glowBottom} aria-hidden="true" />
+      <div className={styles.dotPattern} aria-hidden="true" />
 
-      <div className={styles.container}>
-        <div className={styles.grid}>
-          <motion.div
-            className={styles.infoColumn}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={revealContainer}
+      <div className={styles.hero}>
+        <div className={styles.container}>
+          <motion.span
+            className={styles.tag}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            <motion.span className={styles.tag} variants={revealItem}>Contact</motion.span>
-            <motion.h2 id="contact-heading" className={styles.heading} variants={revealItem}>
-              Talk to Our Team
-            </motion.h2>
-            <motion.p className={styles.subheading} variants={revealItem}>
-              Whether you need a quote, tracking help, or a full supply-chain review, our freight specialists are ready to help you move faster.
-            </motion.p>
+            Contact
+          </motion.span>
+          <motion.h1
+            id="contact-heading"
+            className={styles.heading}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Talk to Our Team
+          </motion.h1>
+          <motion.p
+            className={styles.heroSubheading}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Whether you need a quote, tracking help, or a full supply-chain review, our freight specialists are ready to help you move faster.
+          </motion.p>
+        </div>
+      </div>
 
-            <motion.ul className={styles.highlights} variants={revealItem}>
+      <div className={styles.contactBody}>
+        <div className={styles.container}>
+          <div className={styles.grid}>
+            <motion.div
+              className={styles.infoColumn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-80px' }}
+              variants={revealContainer}
+            >
+              <motion.div variants={revealItem}>
+                <h2 className={styles.sectionHeading}>We&apos;re here to help</h2>
+                <p className={styles.sectionSubheading}>
+                  Reach out directly or send us a message. Our team usually responds within one business day.
+                </p>
+              </motion.div>
+
+              <motion.ul className={styles.highlights} variants={revealItem}>
               {highlights.map((item) => (
                 <li key={item.title} className={styles.highlight}>
                   <span className={styles.highlightIcon}>{ICONS[item.icon as keyof typeof ICONS]}</span>
@@ -464,6 +498,7 @@ export default function ContactForm() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 }

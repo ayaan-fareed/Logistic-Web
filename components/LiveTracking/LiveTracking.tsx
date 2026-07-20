@@ -191,7 +191,7 @@ export default function LiveTracking() {
             </g>
 
             <g>
-              {routes.map((r, i) =>
+              {routes.map((r) =>
                 [0, 1].map((offset) => (
                   <circle
                     key={`${r.id}-mover-${offset}`}

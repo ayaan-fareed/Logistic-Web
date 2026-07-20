@@ -1,67 +1,76 @@
 'use client';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Navbar.module.scss';
 
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const links = [
-    { name: 'About', href: '/about' },
-    { name: 'Services', href: '/services' },
-    { name: 'Industries', href: '/industries' },
-    { name: 'Insights', href: '/insights' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Services', href: isHome ? '#services' : '/services' },
+    { name: 'Approach', href: isHome ? '#approach' : '/about' },
+    { name: 'Insights', href: isHome ? '#insights' : '/insights' },
+    { name: 'Contact', href: isHome ? '#contact' : '/contact' },
   ];
 
   return (
-    <header className={styles.navbar}>
-      <div className={styles.container}>
-        <Link href="/" className={styles.logo}>
-          YourLogistics
+    <>
+      <header className={`${styles.navbar} ${scrolled ? styles.navbarSolid : ''}`}>
+        <Link href="/" className={styles.logo} aria-label="United Carriers home">
+          <span>UNITED</span>
+          <span>CARRIERS</span>
         </Link>
 
-        {/* Desktop menu */}
-        <nav className={styles.desktopMenu}>
+        <nav className={styles.navLinks} aria-label="Primary navigation">
           {links.map((link) => (
-            <Link key={link.name} href={link.href} className={styles.link}>
+            <Link key={link.name} href={link.href}>
               {link.name}
             </Link>
           ))}
         </nav>
 
-        <Link href="/contact" className={styles.ctaButton}>
-          Work with us
+        <Link href={isHome ? '#tracking' : '/tracking'} className={styles.trackButton}>
+          Live tracking <span>↗</span>
         </Link>
 
-        {/* Mobile menu button */}
         <button
-          className={styles.menuToggle}
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
+          className={styles.menuButton}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-expanded={menuOpen}
+          aria-label="Toggle navigation"
         >
-          {isOpen ? '✕' : '☰'}
+          <i />
+          <i />
         </button>
-      </div>
+      </header>
 
-      {/* Mobile menu */}
       <AnimatePresence>
-        {isOpen && (
+        {menuOpen && (
           <motion.nav
             className={styles.mobileMenu}
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
           >
             {links.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={styles.mobileLink}
-                onClick={() => setIsOpen(false)}
+                onClick={() => setMenuOpen(false)}
               >
                 {link.name}
               </Link>
@@ -69,6 +78,6 @@ export default function Navbar() {
           </motion.nav>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

@@ -59,3 +59,23 @@
   line-height: 1.6;
   font-size: 14px;
 }
+
+@media (max-width: 480px) {
+  .faq {
+    padding: 56px 16px;
+  }
+
+  .heading {
+    font-size: 28px;
+  }
+
+  .subheading {
+    margin-bottom: 28px;
+  }
+
+  .question {
+    gap: 12px;
+    min-height: 56px;
+    padding: 16px 0;
+  }
+}

@@ -1,387 +1,131 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
-// ─── Animations ──────────────────────────────────────────────
-@keyframes tickerScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-@keyframes floatParticle {
-  0%, 100% { opacity: 0.3; transform: translateY(0); }
-  50% { opacity: 0.6; transform: translateY(-8px); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-// ─── Footer Container ────────────────────────────────────────
 .footer {
   position: relative;
-  background: #ffffff;
-  color: #1a1a1a;
-  padding: 80px 40px 0;
+  background: #050505;
+  color: #fff;
+  padding: 64px clamp(20px, 4vw, 64px) 28px;
   overflow: hidden;
-  font-family: $font-main;
+  font-family: var(--font-main), $font-main;
 
-  @media (max-width: 768px) {
-    padding: 60px 20px 0;
+  @media (max-width: 767px) {
+    padding: 52px 20px 24px;
   }
 }
 
-// ─── Background Watermark ────────────────────────────────────
 .watermark {
   position: absolute;
-  bottom: 60px;
+  bottom: 40px;
   left: 0;
   right: 0;
   text-align: center;
-  font-size: clamp(60px, 12vw, 180px);
+  font-size: clamp(80px, 14vw, 220px);
   font-weight: 900;
-  letter-spacing: 12px;
-  color: rgba(0, 0, 0, 0.025);
+  letter-spacing: 16px;
+  color: rgba(255, 255, 255, 0.025);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
   z-index: 0;
 }
 
-// ─── Dotted World Map ────────────────────────────────────────
-.worldMap {
-  position: absolute;
-  top: 40px;
-  right: -60px;
-  width: 500px;
-  height: 320px;
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 0;
-  background-image: radial-gradient(circle, #000 1px, transparent 1px);
-  background-size: 8px 8px;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 320'%3E%3Cellipse cx='250' cy='160' rx='220' ry='140' fill='white'/%3E%3Cellipse cx='160' cy='120' rx='80' ry='60' fill='white'/%3E%3Cellipse cx='320' cy='140' rx='100' ry='70' fill='white'/%3E%3Cellipse cx='380' cy='180' rx='60' ry='50' fill='white'/%3E%3C/svg%3E");
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 320'%3E%3Cellipse cx='250' cy='160' rx='220' ry='140' fill='white'/%3E%3Cellipse cx='160' cy='120' rx='80' ry='60' fill='white'/%3E%3Cellipse cx='320' cy='140' rx='100' ry='70' fill='white'/%3E%3Cellipse cx='380' cy='180' rx='60' ry='50' fill='white'/%3E%3C/svg%3E");
-  mask-size: contain;
-  -webkit-mask-size: contain;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-
-  @media (max-width: 1024px) {
-    width: 350px;
-    height: 220px;
-    top: 60px;
-    right: -40px;
-  }
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-}
-
-// ─── Main Content Grid ───────────────────────────────────────
-.mainContent {
+.footerTop {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 48px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-bottom: 60px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-  }
-
-  @media (min-width: 1080px) {
-    grid-template-columns: 0.8fr 1fr 2fr 1.2fr;
-    gap: 48px;
-  }
-}
-
-// ─── Column Base ─────────────────────────────────────────────
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  h4 {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    color: #1a1a1a;
-    margin-bottom: 4px;
-  }
-}
-
-// ─── Fade In Animation ───────────────────────────────────────
-.fadeIn {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-  &:nth-child(2) { transition-delay: 0.1s; }
-  &:nth-child(3) { transition-delay: 0.2s; }
-  &:nth-child(4) { transition-delay: 0.3s; }
-}
-
-.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-// ─── Social Icons ────────────────────────────────────────────
-.socialIcons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1.5px solid #d1d5db;
-    color: #1a1a1a;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
-    &:hover {
-      border-color: #1a1a1a;
-      background: #1a1a1a;
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
-  }
-}
-
-// ─── Navigation Links ────────────────────────────────────────
-.navLinks {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  a {
-    color: #4b5563;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 400;
-    transition: color 0.25s ease, transform 0.25s ease;
-    display: inline-block;
-
-    &:hover {
-      color: #1a1a1a;
-      transform: translateX(3px);
-    }
-  }
-}
-
-// ─── Contact Column ──────────────────────────────────────────
-.contactColumn {
-  gap: 12px;
-}
-
-.contactInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.contactRow {
-  display: flex;
+  grid-template-columns: repeat(4, 1fr);
   gap: 40px;
-  flex-wrap: wrap;
-}
-
-.contactItem {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.contactLabel {
-  font-size: 10px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #9ca3af;
-}
-
-.contactInfo p {
-  font-size: 14px;
-  color: #1a1a1a;
-  line-height: 1.5;
-  margin: 0;
-}
-
-// ─── Payment Section ─────────────────────────────────────────
-.paymentNote {
-  font-size: 12px;
-  color: #6b7280;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.paymentIcons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.paymentBadge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  height: 28px;
-  padding: 0 8px;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  color: #374151;
-  background: #f9fafb;
-  letter-spacing: 0.5px;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-// ─── Industry Ticker ─────────────────────────────────────────
-.ticker {
-  position: relative;
-  z-index: 1;
-  overflow: hidden;
-  border-top: 1px solid #f0f0f0;
-  border-bottom: 1px solid #f0f0f0;
-  padding: 18px 0;
-  margin: 0 -40px;
-
-  @media (max-width: 768px) {
-    margin: 0 -20px;
-  }
-}
-
-.tickerTrack {
-  display: flex;
-  gap: 24px;
-  white-space: nowrap;
-  animation: tickerScroll 30s linear infinite;
-  font-size: clamp(24px, 4vw, 48px);
-  font-weight: 800;
-  color: rgba(0, 0, 0, 0.04);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-
-  span {
-    flex-shrink: 0;
-  }
-}
-
-// ─── Bottom Bar ──────────────────────────────────────────────
-.bottomBar {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid #e5e7eb;
-  margin: 40px -40px 0;
-  padding: 20px 40px;
-  background: #fafafa;
-
-  @media (max-width: 768px) {
-    margin: 40px -20px 0;
-    padding: 20px;
-  }
-}
-
-.bottomContent {
+  padding-bottom: 60px;
   max-width: 1280px;
   margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 40px;
+  }
+}
+
+.footerBrand {
+  color: #fff;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.78;
+  text-decoration: none;
+
+  span:last-child {
+    letter-spacing: 0.11em;
+  }
+}
+
+.footerTop p {
+  color: #8e8e8e;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+}
+
+.footerTop a {
+  color: #fff;
+  display: block;
+  font-size: 13px;
+  text-decoration: none;
+  margin-bottom: 8px;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.footerBottom {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #343434;
+  color: #969696;
+  display: flex;
+  font-size: 10px;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
+  letter-spacing: 0.06em;
+  padding-top: 19px;
+  text-transform: uppercase;
+  max-width: 1280px;
+  margin: 0 auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    gap: 8px;
   }
 }
 
-.copyright {
-  font-size: 11px;
-  color: #6b7280;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin: 0;
-
-  strong {
-    color: #1a1a1a;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+@media (max-width: 480px) {
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
   }
-}
 
-.policyLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-
-  a {
-    font-size: 11px;
-    color: #6b7280;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: color 0.25s ease;
-
-    &:hover {
-      color: #1a1a1a;
-    }
+  .footerTop {
+    gap: 32px;
+    grid-template-columns: 1fr;
   }
-}
 
-.legalNote {
-  font-size: 11px;
-  color: #9ca3af;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  margin: 0;
-}
+  .footerTop a {
+    align-items: center;
+    display: flex;
+    margin-bottom: 0;
+    min-height: 36px;
+  }
 
-// ─── Particles Decoration ────────────────────────────────────
-.particles {
-  position: absolute;
-  bottom: 80px;
-  left: 0;
-  right: 0;
-  height: 100px;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    radial-gradient(circle, #d1d5db 1px, transparent 1px),
-    radial-gradient(circle, #e5e7eb 0.8px, transparent 0.8px);
-  background-size: 60px 60px, 40px 40px;
-  background-position: 0 0, 20px 20px;
-  opacity: 0.4;
-  animation: floatParticle 6s ease-in-out infinite;
-
-  @media (max-width: 768px) {
-    height: 60px;
-    bottom: 60px;
+  .footerBottom {
+    line-height: 1.5;
   }
 }

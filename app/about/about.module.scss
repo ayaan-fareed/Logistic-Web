@@ -79,3 +79,26 @@
     font-size: 14px;
   }
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 96px 16px 48px;
+
+    h1 {
+      font-size: 34px;
+    }
+  }
+
+  .story,
+  .values {
+    padding: 56px 16px;
+  }
+
+  .values h2 {
+    margin-bottom: 28px;
+  }
+
+  .card {
+    padding: 24px 18px;
+  }
+}

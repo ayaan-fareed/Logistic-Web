@@ -78,3 +78,32 @@
   padding: 8px 16px 16px;
   line-height: 1.5;
 }
+
+@media (max-width: 480px) {
+  .insights {
+    padding: 96px 16px 56px;
+  }
+
+  .header {
+    margin-bottom: 32px;
+
+    h1 {
+      font-size: 34px;
+    }
+  }
+
+  .grid {
+    gap: 20px;
+  }
+
+  .imageWrapper {
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .category,
+  .title,
+  .excerpt {
+    overflow-wrap: anywhere;
+  }
+}

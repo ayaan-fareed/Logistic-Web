@@ -45,3 +45,39 @@
     color: var(--primary-color);
   }
 }
+
+@media (max-width: 480px) {
+  .post {
+    padding: 96px 16px 56px;
+  }
+
+  .title {
+    font-size: clamp(1.85rem, 9vw, 2.25rem);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .imageWrapper {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    border-radius: 8px;
+  }
+
+  .content {
+    font-size: 15px;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+  }
+
+  .content img,
+  .content iframe,
+  .content table,
+  .content pre {
+    max-width: 100%;
+  }
+
+  .content pre,
+  .content table {
+    overflow-x: auto;
+  }
+}

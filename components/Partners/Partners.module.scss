@@ -54,3 +54,27 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
   }
 }
+
+@media (max-width: 480px) {
+  .partners {
+    padding: 56px 16px;
+  }
+
+  .heading {
+    font-size: 26px;
+  }
+
+  .subheading {
+    margin-bottom: 28px;
+  }
+
+  .grid {
+    gap: 10px;
+  }
+
+  .logoBox {
+    min-height: 64px;
+    overflow-wrap: anywhere;
+    padding: 14px 8px;
+  }
+}

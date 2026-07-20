@@ -61,3 +61,22 @@
 .icon {
   font-size: 36px;
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 96px 16px 48px;
+
+    h1 {
+      font-size: 34px;
+    }
+  }
+
+  .grid {
+    gap: 16px;
+    padding: 56px 16px;
+  }
+
+  .card {
+    padding: 22px 18px;
+  }
+}

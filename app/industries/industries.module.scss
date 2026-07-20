@@ -50,3 +50,37 @@
 .icon {
   font-size: 36px;
 }
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 96px 16px 48px;
+
+    h1 {
+      font-size: 34px;
+      line-height: 1.15;
+    }
+  }
+
+  .grid {
+    gap: 14px;
+    grid-template-columns: 1fr;
+    padding: 56px 16px;
+  }
+
+  .card {
+    align-items: center;
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .card h3 {
+    margin-top: 0;
+  }
+
+  .icon {
+    flex: 0 0 auto;
+    font-size: 32px;
+  }
+}
