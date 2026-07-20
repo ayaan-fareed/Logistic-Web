@@ -21,10 +21,6 @@ export default function GlobeCanvas() {
           <GlobeScene />
         </Suspense>
       </Canvas>
-      <div className="globe-drag-hint" style={{ alignItems: 'center', background: 'rgba(2, 5, 10, 0.72)', border: '1px solid rgba(172, 194, 235, 0.34)', borderRadius: 999, bottom: 48, color: '#9eb1d8', display: 'flex', fontSize: 11, fontWeight: 500, gap: 9, left: '50%', letterSpacing: '0.05em', padding: '10px 20px', pointerEvents: 'none', position: 'absolute', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}>
-        <span style={{ color: '#d5e1fc', fontSize: 16, lineHeight: 0 }}>☝</span>
-        Drag to rotate the globe
-      </div>
     </div>
   );
 }
