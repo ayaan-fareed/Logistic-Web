@@ -56,7 +56,7 @@ export default function HomePage() {
 
       <div className={styles.marquee} aria-label="Every leg of the journey"><div>Every leg of the journey <b>✦</b> Every leg of the journey <b>✦</b> Every leg of the journey <b>✦</b> Every leg of the journey <b>✦</b></div></div>
 
-      <LiveTracking />
+    <LiveTracking />
 
       <section className={styles.intro} id="intro">
         <div className={styles.introLeft}>

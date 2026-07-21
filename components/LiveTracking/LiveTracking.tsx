@@ -1,10 +1,28 @@
 'use client';
 
-import { useId, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
+import TrackShipment from '@/components/TrackShipment/TrackShipment';
+import { modeIcon, projectToXY } from '@/lib/mapProjection';
 import styles from './LiveTracking.module.scss';
 
 type Hub = { id: string; name: string; x: number; y: number };
 type RoutePair = [Hub, Hub];
+
+type Shipment = {
+  id: string;
+  tracking_number: string;
+  mode: string;
+  current_city: string;
+  current_lat: number;
+  current_lng: number;
+};
+
+type Stats = {
+  activeShipments: number;
+  citiesServed: number;
+  onTimeRate: string;
+};
 
 const hubs: Hub[] = [
   { id: 'ny', name: 'New York', x: 248, y: 168 },
@@ -39,12 +57,6 @@ const modes = [
   { icon: '🏭', label: 'Warehouse' },
 ];
 
-const stats = [
-  { value: '128', label: 'Active Shipments' },
-  { value: '48', label: 'Countries' },
-  { value: '99.8%', label: 'On-Time Delivery' },
-  { value: '24/7', label: 'Tracking' },
-];
 
 function routePath(a: Hub, b: Hub) {
   const midX = (a.x + b.x) / 2;
@@ -55,9 +67,49 @@ function routePath(a: Hub, b: Hub) {
 }
 
 export default function LiveTracking() {
-  const [tracking, setTracking] = useState('');
-  const [status, setStatus] = useState('');
   const baseId = useId();
+
+  const [shipments, setShipments] = useState<Shipment[]>([]);
+  const [liveStats, setLiveStats] = useState<Stats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('/api/shipments');
+        const data = await res.json();
+        setShipments(data.shipments || []);
+        setLiveStats(data.stats || null);
+      } catch (err) {
+        console.error('Failed to load shipments:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+    const interval = setInterval(fetchData, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const displayStats = useMemo(
+    () => [
+      {
+        value: loading ? '—' : (liveStats?.activeShipments ?? '128'),
+        label: 'Active Shipments',
+      },
+      {
+        value: loading ? '—' : (liveStats?.citiesServed ?? '48'),
+        label: 'Cities Served',
+      },
+      {
+        value: loading ? '—' : (liveStats ? `${liveStats.onTimeRate}%` : '99.8%'),
+        label: 'On-Time Delivery',
+      },
+      { value: '24/7', label: 'Tracking' },
+    ],
+    [liveStats, loading]
+  );
 
   const routes = useMemo(
     () =>
@@ -69,15 +121,6 @@ export default function LiveTracking() {
       })),
     [baseId]
   );
-
-  const handleTrack = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!tracking.trim()) return;
-    setStatus('Locating shipment…');
-    setTimeout(() => {
-      setStatus(`Shipment ${tracking.trim().toUpperCase()} — In transit, arrives on schedule.`);
-    }, 900);
-  };
 
   return (
     <section className={styles.tracking} id="tracking">
@@ -95,21 +138,7 @@ export default function LiveTracking() {
             ETAs, and every hand-off in your supply chain.
           </p>
 
-          <form className={styles.form} onSubmit={handleTrack}>
-            <input
-              type="text"
-              value={tracking}
-              onChange={(e) => setTracking(e.target.value)}
-              placeholder="Enter tracking number"
-              className={styles.input}
-              aria-label="Tracking number"
-            />
-            <button type="submit" className={styles.button}>
-              Track
-            </button>
-          </form>
-
-          {status && <p className={styles.status}>{status}</p>}
+          <TrackShipment />
 
           <div className={styles.modeRow}>
             {modes.map((mode) => (
@@ -121,7 +150,7 @@ export default function LiveTracking() {
           </div>
 
           <div className={styles.stats}>
-            {stats.map((s) => (
+            {displayStats.map((s) => (
               <div key={s.label} className={styles.stat}>
                 <div className={styles.statValue}>{s.value}</div>
                 <div className={styles.statLabel}>{s.label}</div>
@@ -232,6 +261,34 @@ export default function LiveTracking() {
               ))}
             </g>
           </svg>
+
+          {!loading && (
+            <div className={styles.mapOverlay}>
+              <div className={styles.mapOverlayInner}>
+                {shipments.map((shipment) => {
+                  const { x, y } = projectToXY(
+                    shipment.current_lat,
+                    shipment.current_lng
+                  );
+                  const { icon, label } = modeIcon(shipment.mode);
+
+                  return (
+                    <motion.div
+                      key={shipment.id}
+                      className={styles.shipmentBadge}
+                      style={{ left: `${x}%`, top: `${y}%` }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <span className={styles.badgeIcon}>{icon}</span>
+                      <span className={styles.badgeLabel}>{label}</span>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {shipmentCards.map((card) => (
             <div key={card.label} className={`${styles.floatingCard} ${card.style}`}>
